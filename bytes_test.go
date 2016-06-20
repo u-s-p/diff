@@ -3,7 +3,7 @@ package diff_test
 import (
 	"testing"
 
-	"github.com/PieterD/diff"
+	"github.com/u-s-p/diff"
 )
 
 func TestBytes(t *testing.T) {
@@ -19,13 +19,13 @@ func TestBytes(t *testing.T) {
 		t.Fatalf("Wrong right length, expected 3, got %d", r)
 	}
 
-	if s.Equal(0, 0) {
+	if s.Equal(0, 0) == diff.True {
 		t.Fatalf("Did not expect equal")
 	}
-	if s.Equal(1, 1) {
+	if s.Equal(1, 1) == diff.True {
 		t.Fatalf("Did not expect equal")
 	}
-	if !s.Equal(1, 2) {
+	if s.Equal(1, 2) != diff.True {
 		t.Fatalf("Expected equal")
 	}
 }

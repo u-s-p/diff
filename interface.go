@@ -4,7 +4,9 @@ package diff
 // It should hold two collections, the Left (or old) one and the Right (or new) one.
 type Interface interface {
 	// Return true if the elements at the given indices in Left and Right are equal.
-	Equal(left, right int) (isEqual bool)
+	Equal(left, right int) (isEqual Equal)
 	// Return the sizes of the Left and Right collections.
 	Length() (left int, right int)
+	// 
+	ContentDiff(left, right int) (iface Interface)
 }

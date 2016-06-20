@@ -3,7 +3,7 @@ package diff_test
 import (
 	"fmt"
 
-	"github.com/PieterD/diff"
+	"github.com/u-s-p/diff"
 )
 
 func ExampleNew() {

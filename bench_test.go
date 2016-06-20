@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/PieterD/diff"
+	"github.com/u-s-p/diff"
 )
 
 func genStr(size int, ratio float64) []byte {

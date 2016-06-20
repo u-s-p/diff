@@ -26,11 +26,13 @@ func snipEnd(iface Interface, l, r int, diff []Diff) []Diff {
 	if r < min {
 		min = r
 	}
+loop:
 	for i := 0; i < min; i++ {
-		if iface.Equal(l-1-i, r-1-i) {
+		switch iface.Equal(l-1-i, r-1-i) {
+		case True:
 			diff = append(diff, Diff{Delta: Both, Index: l - 1 - i})
-		} else {
-			break
+		default:
+			break loop
 		}
 	}
 	return diff
@@ -58,9 +60,10 @@ func lcs(iface Interface, l, r int) [][]int {
 
 	for i := 1; i < rows; i++ {
 		for j := 1; j < cols; j++ {
-			if iface.Equal(i-1, j-1) {
+			switch iface.Equal(i-1, j-1) {
+			case True, Identity:
 				table[i][j] = table[i-1][j-1] + 1
-			} else {
+			default:
 				a := table[i-1][j]
 				b := table[i][j-1]
 				if b > a {
@@ -87,11 +90,16 @@ func walk(iface Interface, l, r int, table [][]int, diff []Diff) []Diff {
 			i--
 			diff = append(diff, Diff{Delta: Left, Index: i})
 		} else {
-			if iface.Equal(i-1, j-1) {
+			switch iface.Equal(i-1, j-1) {
+			case True:
 				i--
 				j--
 				diff = append(diff, Diff{Delta: Both, Index: i})
-			} else {
+			case Identity:
+				i--
+				j--
+				diff = append(diff, Diff{Delta: Content, Index: i, IndexR: j, ContentDiff: New(iface.ContentDiff(i, j))})
+			default:
 				if table[i-1][j] > table[i][j-1] {
 					i--
 					diff = append(diff, Diff{Delta: Left, Index: i})

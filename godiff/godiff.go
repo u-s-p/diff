@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/PieterD/diff"
+	"github.com/u-s-p/diff"
 )
 
 var (

@@ -3,7 +3,7 @@ package diff_test
 import (
 	"testing"
 
-	"github.com/PieterD/diff"
+	"github.com/u-s-p/diff"
 )
 
 func TestDeltaString(t *testing.T) {

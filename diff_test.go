@@ -3,7 +3,7 @@ package diff_test
 import (
 	"testing"
 
-	"github.com/PieterD/diff"
+	"github.com/u-s-p/diff"
 )
 
 // Holds byte slices to diff, one character at a time.
@@ -11,12 +11,19 @@ type Bytes struct {
 	Left, Right []byte
 }
 
-func (b Bytes) Equal(left, right int) bool {
-	return b.Left[left] == b.Right[right]
+func (b Bytes) Equal(left, right int) diff.Equal {
+	if b.Left[left] == b.Right[right] {
+		return diff.True
+	}
+	return diff.False
 }
 
 func (b Bytes) Length() (int, int) {
 	return len(b.Left), len(b.Right)
+}
+
+func (b Bytes) ContentDiff(left, right int) (iface diff.Interface) {
+	return Bytes{}
 }
 
 func bytesFromString(l, r string) Bytes {
