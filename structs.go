@@ -35,7 +35,7 @@ func (e Elements) Length() (int, int) {
 }
 
 func (e Elements) ContentDiff(left, right int) (iface InterfaceContent) {
-	return noContent{
+	return NoContent{
 		Strings{
 			Left:  e.Left[left].Content,
 			Right: e.Right[right].Content,

@@ -1,32 +1,32 @@
 package diff
 
-type noContent struct {
+type NoContent struct {
 	Interface
 }
 
-func (nc noContent) Equal(left, right int) bool {
+func (nc NoContent) Equal(left, right int) bool {
 	return nc.Interface.Equal(left, right)
 }
 
-func (nc noContent) EqualContent(left, right int) Equal {
+func (nc NoContent) EqualContent(left, right int) Equal {
 	if nc.Interface.Equal(left, right) {
 		return True
 	}
 	return False
 }
 
-func (nc noContent) Length() (left, right int) {
+func (nc NoContent) Length() (left, right int) {
 	return nc.Interface.Length()
 }
 
-func (nc noContent) ContentDiff(left, right int) (iface InterfaceContent) {
+func (nc NoContent) ContentDiff(left, right int) (iface InterfaceContent) {
 	return nil
 }
 
 // Runs a diff on the given Interface.
 // Returns the results as a slice of Diff.
 func New(iface Interface) []Diff {
-	return NewContent(noContent{iface})
+	return NewContent(NoContent{iface})
 }
 
 // Runs a diff on the given Interface.
