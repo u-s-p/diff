@@ -20,7 +20,7 @@ func (nc NoContent) Length() (left, right int) {
 }
 
 func (nc NoContent) ContentDiff(left, right int) (iface InterfaceContent) {
-	return nil
+	return NoContent{}
 }
 
 // Runs a diff on the given Interface.
@@ -127,7 +127,7 @@ func walk(iface InterfaceContent, l, r int, table [][]int, diff []Diff) []Diff {
 			case Identity:
 				i--
 				j--
-				diff = append(diff, Diff{Delta: Content, Index: i, IndexR: j, ContentDiff: New(iface.ContentDiff(i, j))})
+				diff = append(diff, Diff{Delta: Content, Index: i, IndexR: j, ContentDiff: NewContent(iface.ContentDiff(i, j))})
 			default:
 				if table[i-1][j] > table[i][j-1] {
 					i--
